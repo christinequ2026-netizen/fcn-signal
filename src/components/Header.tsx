@@ -2,16 +2,19 @@
 
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
+import { useLanguage } from '@/context/LanguageContext';
+import { t } from '@/i18n/translations';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { lang, toggleLang } = useLanguage();
 
   const navLinks = [
-    { label: 'Overview', href: '#' },
-    { label: 'Products', href: '#' },
-    { label: 'Markets', href: '#' },
-    { label: 'Research', href: '#' },
-    { label: 'Risk', href: '#' },
+    { label: t("nav.overview", lang), href: '#' },
+    { label: t("nav.products", lang), href: '#' },
+    { label: t("nav.markets", lang), href: '#' },
+    { label: t("nav.research", lang), href: '#' },
+    { label: t("nav.risk", lang), href: '#' },
   ];
 
   return (
@@ -45,9 +48,22 @@ export default function Header() {
 
           {/* Right side */}
           <div className="flex items-center gap-5">
+            {/* Language toggle */}
+            <button
+              onClick={toggleLang}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded border border-zinc-700/50 hover:border-[#c8a97e]/40 transition-all group"
+            >
+              <span className="text-[11px] text-zinc-500 group-hover:text-zinc-300 tracking-wider font-medium">
+                {lang === "zh" ? "EN" : "中"}
+              </span>
+            </button>
+
+            {/* Live indicator */}
             <div className="flex items-center gap-2">
               <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full pulse-live" />
-              <span className="text-[11px] text-emerald-400 tracking-widest uppercase font-medium">Live</span>
+              <span className="text-[11px] text-emerald-400 tracking-widest uppercase font-medium">
+                {t("header.live", lang)}
+              </span>
             </div>
 
             {/* Mobile toggle */}

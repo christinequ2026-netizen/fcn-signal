@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { SignalItem, PLATFORM_INFO, CATEGORY_INFO } from "@/types";
 import { cn, formatDate, formatNumber } from "@/lib/utils";
+import { useLanguage } from "@/context/LanguageContext";
+import { t, categoryName } from "@/i18n/translations";
 
 interface SignalCardProps {
   item: SignalItem;
@@ -11,9 +13,9 @@ interface SignalCardProps {
 
 export default function SignalCard({ item, onClick }: SignalCardProps) {
   const [showOriginal, setShowOriginal] = useState(false);
+  const { lang } = useLanguage();
 
   const platformInfo = PLATFORM_INFO[item.platform] || PLATFORM_INFO["other"];
-  const categoryInfo = CATEGORY_INFO[item.category] || CATEGORY_INFO["all"];
   const timeAgo = formatDate(item.publishedAt);
 
   return (
@@ -40,7 +42,7 @@ export default function SignalCard({ item, onClick }: SignalCardProps) {
 
           {/* Category */}
           <span className="text-[11px] text-zinc-600">
-            {categoryInfo.name}
+            {categoryName(item.category, lang)}
           </span>
         </div>
 
@@ -71,7 +73,7 @@ export default function SignalCard({ item, onClick }: SignalCardProps) {
             }}
             className="text-[11px] text-[#c8a97e]/80 hover:text-[#c8a97e] transition-colors"
           >
-            {showOriginal ? "Hide original" : "View original"} {showOriginal ? "↑" : "↓"}
+            {showOriginal ? t("card.hideOriginal", lang) : t("card.viewOriginal", lang)} {showOriginal ? "↑" : "↓"}
           </button>
           {showOriginal && (
             <p className="mt-2 text-[12px] text-zinc-600 leading-relaxed italic line-clamp-3">
@@ -84,9 +86,9 @@ export default function SignalCard({ item, onClick }: SignalCardProps) {
       {/* Bottom row: engagement + tags */}
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-4 text-[11px] text-zinc-600">
-          {item.likes > 0 && <span>{formatNumber(item.likes)} likes</span>}
-          {item.comments > 0 && <span>{formatNumber(item.comments)} comments</span>}
-          {item.shares > 0 && <span>{formatNumber(item.shares)} shares</span>}
+          {item.likes > 0 && <span>{formatNumber(item.likes)} {t("card.likes", lang)}</span>}
+          {item.comments > 0 && <span>{formatNumber(item.comments)} {t("card.comments", lang)}</span>}
+          {item.shares > 0 && <span>{formatNumber(item.shares)} {t("card.shares", lang)}</span>}
         </div>
 
         {item.tags && item.tags.length > 0 && (

@@ -1,17 +1,21 @@
 "use client";
 
 import { Stats } from "@/types";
+import { useLanguage } from "@/context/LanguageContext";
+import { t } from "@/i18n/translations";
 
 interface StatsPanelProps {
   stats: Stats;
 }
 
 export default function StatsPanel({ stats }: StatsPanelProps) {
+  const { lang } = useLanguage();
+
   const statCards = [
-    { label: "Today", value: stats.today },
-    { label: "This Week", value: stats.week },
-    { label: "This Month", value: stats.month },
-    { label: "Total Signals", value: stats.total },
+    { label: t("stats.today", lang), value: stats.today },
+    { label: t("stats.week", lang), value: stats.week },
+    { label: t("stats.month", lang), value: stats.month },
+    { label: t("stats.total", lang), value: stats.total },
   ];
 
   return (

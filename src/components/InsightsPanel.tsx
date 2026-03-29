@@ -1,6 +1,8 @@
 'use client';
 
 import { InsightItem } from '@/types';
+import { useLanguage } from '@/context/LanguageContext';
+import { t } from '@/i18n/translations';
 
 interface InsightsPanelProps {
   todayInsights: InsightItem[];
@@ -42,16 +44,18 @@ export default function InsightsPanel({
   monthInsights,
   trends,
 }: InsightsPanelProps) {
+  const { lang } = useLanguage();
+
   return (
     <div className="rounded-lg border border-zinc-800/60 bg-zinc-900/30 p-6">
       <h2 className="text-[11px] text-[#c8a97e] tracking-widest uppercase font-medium mb-6">
-        Intelligence Brief
+        {t("insights.title", lang)}
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <InsightSection title="Today" items={todayInsights} />
-        <InsightSection title="This Week" items={weekInsights} />
-        <InsightSection title="This Month" items={monthInsights} />
-        <InsightSection title="Outlook" items={trends} />
+        <InsightSection title={t("insights.today", lang)} items={todayInsights} />
+        <InsightSection title={t("insights.week", lang)} items={weekInsights} />
+        <InsightSection title={t("insights.month", lang)} items={monthInsights} />
+        <InsightSection title={t("insights.outlook", lang)} items={trends} />
       </div>
     </div>
   );

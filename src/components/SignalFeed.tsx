@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { SignalItem, Category, TimeRange, SortBy, CATEGORY_INFO } from "@/types";
+import { SignalItem, Category, TimeRange, SortBy } from "@/types";
 import { cn, filterByTimeRange, filterByCategory, sortItems, getDateString } from "@/lib/utils";
 import SignalCard from "./SignalCard";
+import { useLanguage } from "@/context/LanguageContext";
+import { t, categoryName } from "@/i18n/translations";
 
 interface SignalFeedProps {
   items: SignalItem[];
@@ -15,6 +17,7 @@ export default function SignalFeed({ items, onItemClick }: SignalFeedProps) {
   const [activeTimeRange, setActiveTimeRange] = useState<TimeRange>("all");
   const [sortBy, setSortBy] = useState<SortBy>("latest");
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
+  const { lang } = useLanguage();
 
   const filteredItems = sortItems(
     filterByCategory(filterByTimeRange(items, activeTimeRange), activeCategory),
@@ -41,11 +44,11 @@ export default function SignalFeed({ items, onItemClick }: SignalFeedProps) {
   ];
 
   const timeRanges: TimeRange[] = ["today", "week", "month", "all"];
-  const timeRangeLabels: Record<TimeRange, string> = {
-    today: "Today",
-    week: "Week",
-    month: "Month",
-    all: "All",
+  const timeRangeKeys: Record<TimeRange, "time.today" | "time.week" | "time.month" | "time.all"> = {
+    today: "time.today",
+    week: "time.week",
+    month: "time.month",
+    all: "time.all",
   };
 
   return (
@@ -54,9 +57,11 @@ export default function SignalFeed({ items, onItemClick }: SignalFeedProps) {
       <div className="flex items-baseline justify-between">
         <div className="flex items-baseline gap-3">
           <h2 className="text-[11px] text-[#c8a97e] tracking-widest uppercase font-medium">
-            Signal Feed
+            {t("feed.title", lang)}
           </h2>
-          <span className="text-xs text-zinc-600">{filteredItems.length} results</span>
+          <span className="text-xs text-zinc-600">
+            {filteredItems.length} {t("feed.results", lang)}
+          </span>
         </div>
 
         {/* Date Navigation */}
@@ -65,7 +70,7 @@ export default function SignalFeed({ items, onItemClick }: SignalFeedProps) {
             onClick={handlePreviousDay}
             className="text-zinc-500 hover:text-zinc-300 transition-colors"
           >
-            ← Prev
+            {t("feed.prev", lang)}
           </button>
           <span className="text-zinc-400 tabular-nums min-w-[7rem] text-center">{dateString}</span>
           <button
@@ -76,7 +81,7 @@ export default function SignalFeed({ items, onItemClick }: SignalFeedProps) {
             )}
             disabled={isToday}
           >
-            Next →
+            {t("feed.next", lang)}
           </button>
         </div>
       </div>
@@ -86,7 +91,6 @@ export default function SignalFeed({ items, onItemClick }: SignalFeedProps) {
         {/* Category pills */}
         <div className="flex flex-wrap gap-1.5">
           {categories.map((category) => {
-            const info = CATEGORY_INFO[category];
             const isActive = activeCategory === category;
             return (
               <button
@@ -99,7 +103,7 @@ export default function SignalFeed({ items, onItemClick }: SignalFeedProps) {
                     : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50"
                 )}
               >
-                {info.name}
+                {categoryName(category, lang)}
               </button>
             );
           })}
@@ -121,7 +125,7 @@ export default function SignalFeed({ items, onItemClick }: SignalFeedProps) {
                   : "text-zinc-600 hover:text-zinc-400"
               )}
             >
-              {timeRangeLabels[range]}
+              {t(timeRangeKeys[range], lang)}
             </button>
           ))}
 
@@ -132,8 +136,8 @@ export default function SignalFeed({ items, onItemClick }: SignalFeedProps) {
             onChange={(e) => setSortBy(e.target.value as SortBy)}
             className="bg-transparent text-zinc-500 text-[12px] focus:outline-none cursor-pointer hover:text-zinc-300 transition-colors"
           >
-            <option value="latest">Latest</option>
-            <option value="hot">Popular</option>
+            <option value="latest">{t("sort.latest", lang)}</option>
+            <option value="hot">{t("sort.popular", lang)}</option>
           </select>
         </div>
       </div>
@@ -148,8 +152,8 @@ export default function SignalFeed({ items, onItemClick }: SignalFeedProps) {
           ))
         ) : (
           <div className="text-center py-20">
-            <p className="text-zinc-600 text-sm">No signals found for this filter</p>
-            <p className="text-zinc-700 text-xs mt-1">Try adjusting your category or time range</p>
+            <p className="text-zinc-600 text-sm">{t("feed.empty.title", lang)}</p>
+            <p className="text-zinc-700 text-xs mt-1">{t("feed.empty.subtitle", lang)}</p>
           </div>
         )}
       </div>

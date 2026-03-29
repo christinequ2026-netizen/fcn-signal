@@ -1,7 +1,9 @@
 "use client";
 
-import { SignalItem, PLATFORM_INFO, CATEGORY_INFO } from "@/types";
+import { SignalItem, PLATFORM_INFO } from "@/types";
 import { cn, formatDate, formatNumber } from "@/lib/utils";
+import { useLanguage } from "@/context/LanguageContext";
+import { t, categoryName } from "@/i18n/translations";
 
 interface ArticleDetailProps {
   item: SignalItem | null;
@@ -10,10 +12,10 @@ interface ArticleDetailProps {
 }
 
 export default function ArticleDetail({ item, isOpen, onClose }: ArticleDetailProps) {
+  const { lang } = useLanguage();
   if (!item) return null;
 
   const platformInfo = PLATFORM_INFO[item.platform] || PLATFORM_INFO["other"];
-  const categoryInfo = CATEGORY_INFO[item.category] || CATEGORY_INFO["all"];
 
   return (
     <>
@@ -39,7 +41,7 @@ export default function ArticleDetail({ item, isOpen, onClose }: ArticleDetailPr
             onClick={onClose}
             className="text-zinc-500 hover:text-zinc-300 transition-colors text-sm flex items-center gap-2"
           >
-            <span>←</span> Back
+            {t("detail.back", lang)}
           </button>
 
           {/* Meta badges */}
@@ -51,7 +53,7 @@ export default function ArticleDetail({ item, isOpen, onClose }: ArticleDetailPr
               {platformInfo.icon} {platformInfo.name}
             </span>
             <span className="text-[11px] text-zinc-500 px-2.5 py-1 rounded bg-zinc-800/50">
-              {categoryInfo.name}
+              {categoryName(item.category, lang)}
             </span>
           </div>
 
@@ -84,8 +86,8 @@ export default function ArticleDetail({ item, isOpen, onClose }: ArticleDetailPr
             <div className="flex items-start gap-3 p-4 rounded-lg bg-rose-500/5 border border-rose-500/10">
               <span className="text-sm mt-0.5">📕</span>
               <div>
-                <p className="text-xs text-rose-300/80">小红书网页版需登录查看原帖</p>
-                <p className="text-[11px] text-zinc-600 mt-0.5">可在 App 中搜索标题查看完整内容</p>
+                <p className="text-xs text-rose-300/80">{t("detail.xhsNotice", lang)}</p>
+                <p className="text-[11px] text-zinc-600 mt-0.5">{t("detail.xhsHint", lang)}</p>
               </div>
             </div>
           )}
@@ -93,7 +95,9 @@ export default function ArticleDetail({ item, isOpen, onClose }: ArticleDetailPr
           {/* Original text */}
           {item.isTranslated && item.originalText && (
             <div className="space-y-2 border-t border-zinc-800/50 pt-5">
-              <h3 className="text-[11px] text-[#c8a97e] tracking-widest uppercase">Original</h3>
+              <h3 className="text-[11px] text-[#c8a97e] tracking-widest uppercase">
+                {t("detail.original", lang)}
+              </h3>
               <p className="text-[13px] text-zinc-600 leading-relaxed italic">
                 {item.originalText}
               </p>
@@ -103,7 +107,9 @@ export default function ArticleDetail({ item, isOpen, onClose }: ArticleDetailPr
           {/* Tags */}
           {item.tags && item.tags.length > 0 && (
             <div className="space-y-2 border-t border-zinc-800/50 pt-5">
-              <h3 className="text-[11px] text-zinc-600 tracking-widest uppercase">Tags</h3>
+              <h3 className="text-[11px] text-zinc-600 tracking-widest uppercase">
+                {t("detail.tags", lang)}
+              </h3>
               <div className="flex flex-wrap gap-2">
                 {item.tags.map((tag) => (
                   <span
@@ -122,15 +128,21 @@ export default function ArticleDetail({ item, isOpen, onClose }: ArticleDetailPr
             <div className="grid grid-cols-3 gap-3 border-t border-zinc-800/50 pt-5">
               <div className="text-center py-3 rounded bg-zinc-900/50">
                 <p className="text-lg font-light text-zinc-200">{formatNumber(item.likes)}</p>
-                <p className="text-[10px] text-zinc-600 uppercase tracking-wider mt-0.5">Likes</p>
+                <p className="text-[10px] text-zinc-600 uppercase tracking-wider mt-0.5">
+                  {t("detail.likes", lang)}
+                </p>
               </div>
               <div className="text-center py-3 rounded bg-zinc-900/50">
                 <p className="text-lg font-light text-zinc-200">{formatNumber(item.comments)}</p>
-                <p className="text-[10px] text-zinc-600 uppercase tracking-wider mt-0.5">Comments</p>
+                <p className="text-[10px] text-zinc-600 uppercase tracking-wider mt-0.5">
+                  {t("detail.comments", lang)}
+                </p>
               </div>
               <div className="text-center py-3 rounded bg-zinc-900/50">
                 <p className="text-lg font-light text-zinc-200">{formatNumber(item.shares)}</p>
-                <p className="text-[10px] text-zinc-600 uppercase tracking-wider mt-0.5">Shares</p>
+                <p className="text-[10px] text-zinc-600 uppercase tracking-wider mt-0.5">
+                  {t("detail.shares", lang)}
+                </p>
               </div>
             </div>
           )}
@@ -142,7 +154,7 @@ export default function ArticleDetail({ item, isOpen, onClose }: ArticleDetailPr
             rel="noopener noreferrer"
             className="block w-full px-4 py-3 bg-zinc-100 hover:bg-white text-zinc-900 text-sm font-medium rounded-lg transition-colors text-center mt-4"
           >
-            View Source →
+            {t("detail.viewSource", lang)}
           </a>
         </div>
       </div>

@@ -7,6 +7,8 @@ import HotKeywords from "@/components/HotKeywords";
 import SignalFeed from "@/components/SignalFeed";
 import ArticleDetail from "@/components/ArticleDetail";
 import { SignalItem } from "@/types";
+import { useLanguage } from "@/context/LanguageContext";
+import { t } from "@/i18n/translations";
 
 interface HomeClientProps {
   signals: SignalItem[];
@@ -23,6 +25,7 @@ interface HomeClientProps {
 export default function HomeClient({ signals, stats, insights, hotKeywords }: HomeClientProps) {
   const [selectedItem, setSelectedItem] = useState<SignalItem | null>(null);
   const [detailOpen, setDetailOpen] = useState(false);
+  const { lang } = useLanguage();
 
   const handleItemClick = (item: SignalItem) => {
     setSelectedItem(item);
@@ -40,10 +43,10 @@ export default function HomeClient({ signals, stats, insights, hotKeywords }: Ho
         {/* Hero section */}
         <div className="space-y-2 pb-2">
           <h1 className="text-2xl font-light text-zinc-100 tracking-tight">
-            Structured Products <span className="text-[#c8a97e]">Intelligence</span>
+            {t("hero.title.1", lang)} <span className="text-[#c8a97e]">{t("hero.title.2", lang)}</span>
           </h1>
           <p className="text-sm text-zinc-500">
-            Real-time signals across FCN, Autocallable, and Snowball instruments
+            {t("hero.subtitle", lang)}
           </p>
         </div>
 

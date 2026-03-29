@@ -2,6 +2,8 @@
 
 import { HotKeyword } from '@/types';
 import { cn } from '@/lib/utils';
+import { useLanguage } from '@/context/LanguageContext';
+import { t } from '@/i18n/translations';
 
 interface HotKeywordsProps {
   keywords: HotKeyword[];
@@ -9,11 +11,12 @@ interface HotKeywordsProps {
 
 export default function HotKeywords({ keywords }: HotKeywordsProps) {
   const topKeywords = keywords.slice(0, 9);
+  const { lang } = useLanguage();
 
   return (
     <div className="rounded-lg border border-zinc-800/60 bg-zinc-900/30 p-6 h-full">
       <h2 className="text-[11px] text-[#c8a97e] tracking-widest uppercase font-medium mb-6">
-        Trending Topics
+        {t("hot.title", lang)}
       </h2>
 
       <div className="space-y-1">
