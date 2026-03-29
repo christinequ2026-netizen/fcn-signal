@@ -20,96 +20,81 @@ export default function SignalCard({ item, onClick }: SignalCardProps) {
     <article
       onClick={() => onClick(item)}
       className={cn(
-        "cursor-pointer rounded-xl border border-gray-800 bg-gray-900/80 p-4 transition-all duration-300",
-        "hover:border-amber-500/30 hover:-translate-y-1"
+        "cursor-pointer rounded-lg border border-zinc-800/40 bg-zinc-900/20 px-5 py-4 transition-all duration-200",
+        "hover:bg-zinc-900/60 hover:border-zinc-700/60"
       )}
     >
-      {/* Top Row: Platform, Category, Time */}
-      <div className="mb-3 flex items-center justify-between gap-2">
-        <div className="flex items-center gap-2">
-          {/* Platform Badge */}
-          <div
-            className="flex items-center gap-1 rounded-lg px-2.5 py-1 text-xs font-semibold"
+      {/* Top row: meta */}
+      <div className="flex items-center justify-between gap-3 mb-2.5">
+        <div className="flex items-center gap-2.5">
+          {/* Platform */}
+          <span
+            className="text-[11px] font-medium px-2 py-0.5 rounded"
             style={{
-              backgroundColor: `${platformInfo.color}20`,
               color: platformInfo.color,
+              backgroundColor: `${platformInfo.color}12`,
             }}
           >
-            <span>{platformInfo.icon}</span>
-            <span>{platformInfo.name}</span>
-          </div>
+            {platformInfo.name}
+          </span>
 
-          {/* Category Badge */}
-          <div className="rounded-lg bg-gray-800/50 px-2.5 py-1 text-xs font-medium text-gray-300">
+          {/* Category */}
+          <span className="text-[11px] text-zinc-600">
             {categoryInfo.name}
-          </div>
+          </span>
         </div>
 
-        {/* Time Ago */}
-        <span className="text-xs text-gray-500">{timeAgo}</span>
+        {/* Time */}
+        <span className="text-[11px] text-zinc-600 tabular-nums flex-shrink-0">{timeAgo}</span>
       </div>
 
-      {/* Author Name */}
-      <h3 className="mb-2 text-sm font-semibold text-gray-100">
-        {item.author}
+      {/* Author */}
+      <p className="text-[12px] text-zinc-500 mb-1">{item.author}</p>
+
+      {/* Title */}
+      <h3 className="text-[14px] font-medium text-zinc-200 leading-snug mb-1.5 line-clamp-2">
+        {item.title}
       </h3>
 
-      {/* Summary Text */}
-      <p className="mb-3 line-clamp-3 text-sm text-gray-300">
+      {/* Summary */}
+      <p className="text-[13px] text-zinc-500 leading-relaxed line-clamp-2 mb-3">
         {item.summary}
       </p>
 
-      {/* Translation Toggle and Original Text */}
+      {/* Translation toggle */}
       {item.isTranslated && item.originalText && (
-        <div className="mb-3 border-t border-gray-800 pt-3">
+        <div className="mb-3">
           <button
             onClick={(e) => {
               e.stopPropagation();
               setShowOriginal(!showOriginal);
             }}
-            className="flex items-center gap-1 text-xs text-amber-400 hover:text-amber-300 transition-colors"
+            className="text-[11px] text-[#c8a97e]/80 hover:text-[#c8a97e] transition-colors"
           >
-            查看英文原文{" "}
-            <span
-              className={cn(
-                "transition-transform duration-200",
-                showOriginal && "rotate-180"
-              )}
-            >
-              ▾
-            </span>
+            {showOriginal ? "Hide original" : "View original"} {showOriginal ? "↑" : "↓"}
           </button>
-
           {showOriginal && (
-            <p className="mt-2 line-clamp-3 text-xs text-gray-400">
+            <p className="mt-2 text-[12px] text-zinc-600 leading-relaxed italic line-clamp-3">
               {item.originalText}
             </p>
           )}
         </div>
       )}
 
-      {/* Bottom Row: Stats and Tags */}
-      <div className="space-y-3">
-        {/* Stats */}
-        <div className="flex items-center gap-4 text-xs text-gray-400">
-          <span className="flex items-center gap-1">
-            ❤️ {formatNumber(item.likes)}
-          </span>
-          <span className="flex items-center gap-1">
-            💬 {formatNumber(item.comments)}
-          </span>
-          <span className="flex items-center gap-1">
-            🔄 {formatNumber(item.shares)}
-          </span>
+      {/* Bottom row: engagement + tags */}
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center gap-4 text-[11px] text-zinc-600">
+          {item.likes > 0 && <span>{formatNumber(item.likes)} likes</span>}
+          {item.comments > 0 && <span>{formatNumber(item.comments)} comments</span>}
+          {item.shares > 0 && <span>{formatNumber(item.shares)} shares</span>}
         </div>
 
-        {/* Tags */}
         {item.tags && item.tags.length > 0 && (
-          <div className="flex flex-wrap gap-1.5">
-            {item.tags.map((tag) => (
+          <div className="flex gap-1.5 overflow-hidden">
+            {item.tags.slice(0, 3).map((tag) => (
               <span
                 key={tag}
-                className="rounded-full bg-gradient-to-r from-amber-500/20 to-amber-600/10 px-2.5 py-1 text-xs font-medium text-amber-300 border border-amber-500/20"
+                className="text-[10px] text-zinc-600 bg-zinc-800/50 px-2 py-0.5 rounded truncate max-w-[100px]"
               >
                 {tag}
               </span>

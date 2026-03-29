@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { cn } from "@/lib/utils";
 
 export default function FloatingButtons() {
   const [showTopButton, setShowTopButton] = useState(false);
@@ -17,30 +18,22 @@ export default function FloatingButtons() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const scrollToBottom = () => {
-    window.scrollTo({
-      top: document.documentElement.scrollHeight,
-      behavior: "smooth",
-    });
-  };
-
   return (
-    <div className="fixed bottom-6 right-6 flex flex-col gap-3 z-40">
-      {showTopButton && (
-        <button
-          onClick={scrollToTop}
-          className="group flex h-12 w-12 items-center justify-center rounded-full bg-gray-900 border border-gray-700 text-amber-400 shadow-lg transition-all duration-300 hover:border-amber-500 hover:bg-gray-800 hover:shadow-amber-500/20"
-          title="回到顶部"
-        >
-          <span className="text-lg transition-transform group-hover:-translate-y-0.5">↑</span>
-        </button>
-      )}
+    <div className="fixed bottom-8 right-8 z-40">
       <button
-        onClick={scrollToBottom}
-        className="group flex h-12 w-12 items-center justify-center rounded-full bg-gray-900 border border-gray-700 text-amber-400 shadow-lg transition-all duration-300 hover:border-amber-500 hover:bg-gray-800 hover:shadow-amber-500/20"
-        title="去到底部"
+        onClick={scrollToTop}
+        className={cn(
+          "flex h-10 w-10 items-center justify-center rounded-full",
+          "bg-zinc-900/90 border border-zinc-700/50 text-zinc-400",
+          "backdrop-blur-sm transition-all duration-300",
+          "hover:border-[#c8a97e]/40 hover:text-[#c8a97e]",
+          showTopButton
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-4 pointer-events-none"
+        )}
+        aria-label="Back to top"
       >
-        <span className="text-lg transition-transform group-hover:translate-y-0.5">↓</span>
+        <span className="text-sm">↑</span>
       </button>
     </div>
   );

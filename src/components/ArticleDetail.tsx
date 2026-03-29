@@ -20,95 +20,95 @@ export default function ArticleDetail({ item, isOpen, onClose }: ArticleDetailPr
       {/* Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/60 z-40 transition-opacity"
+          className="fixed inset-0 bg-black/70 backdrop-blur-sm z-40 transition-opacity"
           onClick={onClose}
         />
       )}
 
-      {/* Slide-over Panel */}
+      {/* Panel */}
       <div
         className={cn(
-          "fixed right-0 top-0 h-full w-full sm:max-w-lg bg-gray-950 border-l border-gray-800 z-50",
-          "transform transition-transform duration-300 ease-in-out overflow-y-auto",
+          "fixed right-0 top-0 h-full w-full sm:max-w-xl bg-[#0c0c0e] border-l border-zinc-800/60 z-50",
+          "transform transition-transform duration-300 ease-out overflow-y-auto",
           isOpen ? "translate-x-0" : "translate-x-full"
         )}
       >
-        <div className="p-6 space-y-6">
-          {/* Close Button */}
+        <div className="p-8 space-y-6">
+          {/* Close */}
           <button
             onClick={onClose}
-            className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+            className="text-zinc-500 hover:text-zinc-300 transition-colors text-sm flex items-center gap-2"
           >
-            <span className="text-lg">←</span>
-            <span className="text-sm">返回</span>
+            <span>←</span> Back
           </button>
 
-          {/* Platform and Category Badges */}
-          <div className="flex items-center gap-3">
+          {/* Meta badges */}
+          <div className="flex items-center gap-2.5">
             <span
-              className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium text-white"
-              style={{ backgroundColor: platformInfo?.color || "#6B7280" }}
+              className="text-[11px] font-medium px-2.5 py-1 rounded"
+              style={{ color: platformInfo.color, backgroundColor: `${platformInfo.color}15` }}
             >
-              <span>{platformInfo?.icon}</span>
-              {platformInfo?.name || item.platform}
+              {platformInfo.icon} {platformInfo.name}
             </span>
-            <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-gray-700 text-gray-200">
-              <span>{categoryInfo?.icon}</span>
-              {categoryInfo?.name || item.category}
+            <span className="text-[11px] text-zinc-500 px-2.5 py-1 rounded bg-zinc-800/50">
+              {categoryInfo.name}
             </span>
           </div>
 
           {/* Title */}
-          <h2 className="text-xl font-semibold text-white leading-tight">{item.title}</h2>
+          <h2 className="text-xl font-medium text-zinc-100 leading-snug tracking-tight">
+            {item.title}
+          </h2>
 
-          {/* Author and Time */}
-          <div className="flex items-center gap-3 py-2 border-b border-gray-800">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold text-white" style={{ backgroundColor: platformInfo?.color || "#6B7280" }}>
-                {item.author.charAt(0)}
-              </div>
-              <div>
-                <p className="text-sm font-semibold text-white">{item.author}</p>
-                <p className="text-xs text-gray-400">{formatDate(item.publishedAt)}</p>
-              </div>
+          {/* Author & time */}
+          <div className="flex items-center gap-3 py-3 border-y border-zinc-800/50">
+            <div
+              className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium text-zinc-100"
+              style={{ backgroundColor: `${platformInfo.color}30` }}
+            >
+              {item.author.charAt(0)}
+            </div>
+            <div>
+              <p className="text-sm text-zinc-300">{item.author}</p>
+              <p className="text-[11px] text-zinc-600">{formatDate(item.publishedAt)}</p>
             </div>
           </div>
 
           {/* Content */}
-          <div className="text-gray-300 text-sm leading-relaxed whitespace-pre-wrap">
+          <div className="text-[14px] text-zinc-400 leading-[1.8] whitespace-pre-wrap">
             {item.content || item.summary}
           </div>
 
-          {/* Xiaohongshu App Notice */}
+          {/* Xiaohongshu notice */}
           {item.platform === "xiaohongshu" && (
-            <div className="flex items-start gap-3 p-4 rounded-lg bg-rose-500/10 border border-rose-500/20">
-              <span className="text-lg mt-0.5">📕</span>
-              <div className="space-y-1">
-                <p className="text-sm font-medium text-rose-300">小红书内容已内嵌展示</p>
-                <p className="text-xs text-gray-400">小红书网页版需要扫码登录才能查看原帖。如需查看评论区互动，可在小红书 App 中搜索帖子标题。</p>
+            <div className="flex items-start gap-3 p-4 rounded-lg bg-rose-500/5 border border-rose-500/10">
+              <span className="text-sm mt-0.5">📕</span>
+              <div>
+                <p className="text-xs text-rose-300/80">小红书网页版需登录查看原帖</p>
+                <p className="text-[11px] text-zinc-600 mt-0.5">可在 App 中搜索标题查看完整内容</p>
               </div>
             </div>
           )}
 
-          {/* Original Text Section (if translated) */}
+          {/* Original text */}
           {item.isTranslated && item.originalText && (
-            <div className="space-y-3 border-t border-gray-800 pt-6">
-              <h3 className="text-sm font-semibold text-amber-400">英文原文</h3>
-              <p className="text-gray-400 text-sm leading-relaxed whitespace-pre-wrap italic">
+            <div className="space-y-2 border-t border-zinc-800/50 pt-5">
+              <h3 className="text-[11px] text-[#c8a97e] tracking-widest uppercase">Original</h3>
+              <p className="text-[13px] text-zinc-600 leading-relaxed italic">
                 {item.originalText}
               </p>
             </div>
           )}
 
-          {/* Tags Section */}
+          {/* Tags */}
           {item.tags && item.tags.length > 0 && (
-            <div className="space-y-3 border-t border-gray-800 pt-6">
-              <h3 className="text-sm font-semibold text-gray-300">标签</h3>
+            <div className="space-y-2 border-t border-zinc-800/50 pt-5">
+              <h3 className="text-[11px] text-zinc-600 tracking-widest uppercase">Tags</h3>
               <div className="flex flex-wrap gap-2">
                 {item.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="inline-flex items-center px-2.5 py-1 rounded-full text-xs bg-amber-500/10 text-amber-300 border border-amber-500/20"
+                    className="text-[11px] text-zinc-500 bg-zinc-800/60 px-2.5 py-1 rounded"
                   >
                     {tag}
                   </span>
@@ -117,73 +117,33 @@ export default function ArticleDetail({ item, isOpen, onClose }: ArticleDetailPr
             </div>
           )}
 
-          {/* Engagement Stats */}
-          <div className="space-y-3 border-t border-gray-800 pt-6">
-            <h3 className="text-sm font-semibold text-gray-300">互动数据</h3>
-            <div className="grid grid-cols-3 gap-4">
-              <div className="text-center p-3 rounded-lg bg-gray-900">
-                <p className="text-lg font-semibold text-white">
-                  {formatNumber(item.likes)}
-                </p>
-                <p className="text-xs text-gray-400">❤️ 赞</p>
+          {/* Stats */}
+          {(item.likes > 0 || item.comments > 0 || item.shares > 0) && (
+            <div className="grid grid-cols-3 gap-3 border-t border-zinc-800/50 pt-5">
+              <div className="text-center py-3 rounded bg-zinc-900/50">
+                <p className="text-lg font-light text-zinc-200">{formatNumber(item.likes)}</p>
+                <p className="text-[10px] text-zinc-600 uppercase tracking-wider mt-0.5">Likes</p>
               </div>
-              <div className="text-center p-3 rounded-lg bg-gray-900">
-                <p className="text-lg font-semibold text-white">
-                  {formatNumber(item.comments)}
-                </p>
-                <p className="text-xs text-gray-400">💬 评论</p>
+              <div className="text-center py-3 rounded bg-zinc-900/50">
+                <p className="text-lg font-light text-zinc-200">{formatNumber(item.comments)}</p>
+                <p className="text-[10px] text-zinc-600 uppercase tracking-wider mt-0.5">Comments</p>
               </div>
-              <div className="text-center p-3 rounded-lg bg-gray-900">
-                <p className="text-lg font-semibold text-white">
-                  {formatNumber(item.shares)}
-                </p>
-                <p className="text-xs text-gray-400">🔄 分享</p>
+              <div className="text-center py-3 rounded bg-zinc-900/50">
+                <p className="text-lg font-light text-zinc-200">{formatNumber(item.shares)}</p>
+                <p className="text-[10px] text-zinc-600 uppercase tracking-wider mt-0.5">Shares</p>
               </div>
             </div>
-          </div>
-
-          {/* Video Button (if present) */}
-          {item.videoUrl && (
-            <a
-              href={item.videoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block w-full px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors text-center"
-            >
-              ▶️ 播放视频
-            </a>
           )}
 
-          {/* View Original Button */}
-          {item.platform === "xiaohongshu" ? (
-            <div className="space-y-2">
-              <a
-                href={item.originalUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block w-full px-4 py-3 bg-rose-500 hover:bg-rose-600 text-white font-bold rounded-lg transition-colors text-center"
-              >
-                📕 在小红书中打开（需登录）
-              </a>
-              <button
-                onClick={() => {
-                  navigator.clipboard.writeText(item.title);
-                }}
-                className="block w-full px-4 py-3 bg-gray-700 hover:bg-gray-600 text-white font-medium rounded-lg transition-colors text-center cursor-pointer"
-              >
-                📋 复制标题到小红书搜索
-              </button>
-            </div>
-          ) : (
-            <a
-              href={item.originalUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block w-full px-4 py-3 bg-amber-500 hover:bg-amber-600 text-black font-bold rounded-lg transition-colors text-center"
-            >
-              查看原文 →
-            </a>
-          )}
+          {/* CTA */}
+          <a
+            href={item.originalUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block w-full px-4 py-3 bg-zinc-100 hover:bg-white text-zinc-900 text-sm font-medium rounded-lg transition-colors text-center mt-4"
+          >
+            View Source →
+          </a>
         </div>
       </div>
     </>

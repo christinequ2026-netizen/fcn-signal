@@ -36,7 +36,17 @@ export default function HomeClient({ signals, stats, insights, hotKeywords }: Ho
 
   return (
     <>
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8">
+      <main className="max-w-[1400px] mx-auto px-6 lg:px-10 py-8 space-y-8">
+        {/* Hero section */}
+        <div className="space-y-2 pb-2">
+          <h1 className="text-2xl font-light text-zinc-100 tracking-tight">
+            Structured Products <span className="text-[#c8a97e]">Intelligence</span>
+          </h1>
+          <p className="text-sm text-zinc-500">
+            Real-time signals across FCN, Autocallable, and Snowball instruments
+          </p>
+        </div>
+
         <StatsPanel stats={stats} />
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -52,6 +62,9 @@ export default function HomeClient({ signals, stats, insights, hotKeywords }: Ho
             <HotKeywords keywords={hotKeywords} />
           </div>
         </div>
+
+        {/* Divider */}
+        <div className="h-px bg-gradient-to-r from-transparent via-zinc-800 to-transparent" />
 
         <SignalFeed items={signals} onItemClick={handleItemClick} />
       </main>
