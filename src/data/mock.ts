@@ -1,13 +1,16 @@
 import { SignalItem, InsightItem, HotKeyword, Stats } from "@/types";
 
 const today = new Date().toISOString().split("T")[0];
+const now = new Date();
+const oneWeekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000).toISOString();
+const oneMonthAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000).toISOString();
 
-
-export const mockStats: Stats = {
-  today: 12,
-  week: 54,
-  month: 186,
-  total: 8420,
+// Stats will be computed after mockSignals is defined — see bottom of file
+export let mockStats: Stats = {
+  today: 0,
+  week: 0,
+  month: 0,
+  total: 0,
 };
 
 export const mockInsights = {
@@ -3938,3 +3941,11 @@ export const mockSignals: SignalItem[] = [
     tags: ["星展私行", "三种策略", "认购增长35%", "收入策略"],
   },
 ];
+
+// ====== 动态计算统计数据 ======
+mockStats = {
+  today: mockSignals.filter(s => s.publishedAt?.startsWith(today)).length,
+  week: mockSignals.filter(s => s.publishedAt && s.publishedAt >= oneWeekAgo).length,
+  month: mockSignals.filter(s => s.publishedAt && s.publishedAt >= oneMonthAgo).length,
+  total: mockSignals.length,
+};
