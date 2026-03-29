@@ -59,9 +59,11 @@ export default function SignalCard({ item, onClick }: SignalCardProps) {
       </h3>
 
       {/* Summary */}
-      <p className="text-[13px] text-zinc-500 leading-relaxed line-clamp-2 mb-3">
-        {item.summary}
-      </p>
+      {item.summary && item.summary !== item.title && (
+        <p className="text-[13px] text-zinc-500 leading-relaxed line-clamp-2 mb-3">
+          {item.summary}
+        </p>
+      )}
 
       {/* Translation toggle */}
       {item.isTranslated && item.originalText && (
