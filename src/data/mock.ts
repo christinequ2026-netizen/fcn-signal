@@ -17,24 +17,24 @@ export const mockInsights = {
   today: [
     { id: "i1", text: "小红书博主Link保险笔记发帖\"年化22%的带息等跌神器\"引发热议，FCN话题在小红书理财圈持续升温。" },
     { id: "i2", text: "穆迪发布2026年结构化金融展望，指出低利率环境将继续推动FCN等收益增强型产品需求增长。" },
-    { id: "i3", text: "证券时报回顾2024年雪球到期潮，部分资金确认转向FCN等固定票息产品，市场结构持续演变。" },
+    { id: "i3", text: "证券时报回顾2024年雪球到期潮，部分资金确认转向FCN等固定票息产品，市场结构持续演变。" }
   ] as InsightItem[],
   week: [
     { id: "i4", text: "星展私人银行报告：2025年FCN认购量同比增长35%，三种策略画像（保守/均衡/进取）正在形成。" },
     { id: "i5", text: "老虎证券、富途证券先后上线在线FCN认购功能，散户准入门槛从百万美元降至数万级别。" },
-    { id: "i6", text: "LinkedIn热文解析FCN本质为\"卖出看跌期权换取固定票息\"，英文金融圈讨论度上升。" },
+    { id: "i6", text: "LinkedIn热文解析FCN本质为\"卖出看跌期权换取固定票息\"，英文金融圈讨论度上升。" }
   ] as InsightItem[],
   month: [
     { id: "i7", text: "36氪、澎湃新闻深度报道2024年雪球爆仓事件，投资者300万本金灰飞烟灭引发社会关注。" },
     { id: "i8", text: "The National报道亚洲富人因FCN产品损失数十亿美元，多家私行收紧FCN销售标准。" },
-    { id: "i9", text: "UBS联合中银国际发行首批以太坊代币化结构性票据，FCN产品与区块链技术融合进入实质阶段。" },
+    { id: "i9", text: "UBS联合中银国际发行首批以太坊代币化结构性票据，FCN产品与区块链技术融合进入实质阶段。" }
   ] as InsightItem[],
   trends: [
     { id: "i10", text: "FCN产品从亚太向全球扩展：泰国Bualuang、加拿大Pi Securities相继推出FCN产品线。" },
     { id: "i11", text: "中金研报估算雪球类结构化产品规模近1000亿元，股指期货贴水接近历史极值或推升新一轮发行。" },
     { id: "i12", text: "知乎、小红书FCN科普内容阅读量激增，万赞长文和实战分享正在推动散户对结构化产品的认知升级。" },
     { id: "i13", text: "Julius Baer建议在VIX高位时建仓FCN：高波动率环境下期权费上升推高票息水平。" },
-    { id: "i14", text: "国泰君安国际首推虚拟资产ETF结构化产品，中资券商在港结构化产品创新加速。" },
+    { id: "i14", text: "国泰君安国际首推虚拟资产ETF结构化产品，中资券商在港结构化产品创新加速。" }
   ] as InsightItem[],
 };
 
@@ -50,7 +50,7 @@ export const mockHotKeywords: HotKeyword[] = [
   { keyword: "波动率",         count: 58,  sourceUrl: "https://www.juliusbaer.com/en/business-navigator/business-strategy/a-good-structure-for-times-of-market-turmoil/" },
   { keyword: "代币化票据",     count: 47,  sourceUrl: "https://www.ubs.com/global/en/media/display-page-ndp/en-20230609-tokenized-notes.html" },
   { keyword: "Autocallable",  count: 41,  sourceUrl: "https://artafinance.com/global/insights/custom-fixed-coupon-notes-understanding-the-levers-for-higher-yields" },
-  { keyword: "高票息陷阱",     count: 36,  sourceUrl: "https://fininnovation.capitalfutures.com.tw/Article/FcnHighYieldTruth" },
+  { keyword: "高票息陷阱",     count: 36,  sourceUrl: "https://fininnovation.capitalfutures.com.tw/Article/FcnHighYieldTruth" }
 ];
 
 export const mockSignals: SignalItem[] = [
@@ -890,63 +890,6 @@ export const mockSignals: SignalItem[] = [
     category: "market",
     originalUrl: "https://weixin.sogou.com/link?url=dn9a_-gY295K0Rci_xozVXfdMkSQTLW6ft3wfAVofsP5Peu-UiA4DL0Mrd1RByvdWaLrjuQgzNmVgrFeYQugDqgCOQnPUkv1M10Itp0oDWe_IeVSScOB_HhsLyxcBCXIUTeZN1lHu_DVQSrWhSvYcomIQWjh49dD26mPrD4Vxkdhh3bwWC_QOm1UgjiUhawFHY04Z_FxOI1ZXtnKoqEHzBIrZkuLi3Tu3TscpYz1KO-urstsjDvjE1wVhcDqNSkZ1FhV7xFLgwNI68yjz5mjT7fTyV4gKeCB4joqpSrQE71xOwslWbqNdD1CoMp6Vt-_iZqwg0yoRFw.&type=2&query=%E6%94%B6%E7%9B%8A%E5%87%AD%E8%AF%81&token=12BE0D6606A505919E98D1B4E16CAAD69FE752FA69C9362D",
     publishedAt: "2016-06-19T22:38:00Z",
-    likes: 0,
-    comments: 0,
-    shares: 0,
-    tags: [],
-  },
-
-  {
-    id: "e49e5615a70c",
-    title: "群核科技通过港交所聆讯 | 3月29日，港交所文件显示，Manycore Tech Inc.（以下简称“群核科技”）更新聆讯后资料集，标志着公司已顺利通过港交所上市聆...",
-    summary: "群核科技通过港交所聆讯 | 3月29日，港交所文件显示，Manycore Tech Inc.（以下简称“群核科技”）更新聆讯后资料集，标志着公司已顺利通过港交所上市聆讯。本次IPO由摩根大通和建银国际担任联席保荐人。",
-    author: "news",
-    platform: "news",
-    category: "market",
-    originalUrl: "https://www.yicai.com/brief/103109140.html",
-    publishedAt: "2026-03-29T04:44:00Z",
-    likes: 0,
-    comments: 0,
-    shares: 0,
-    tags: [],
-  },
-  {
-    id: "5f3a483f07d9",
-    title: "美国私募信贷风险快速积聚：离危机还有多远？",
-    summary: "过去一个月，美国私募信贷市场异象已从个别违约事件演变为行业性的结构性压力，市场风险明显上升。首先是包括贝莱德（BlackRock）、阿波罗（Apollo）、Ares、黑石（Blackstone）以及Blue Owl等在内的顶级另类资产管理公司，近期均遭遇了远超历史常态的巨额赎回请求。行业普遍触及季度赎回上限（通常为净值的5%），机构纷纷启动限制机制，导致资金被动锁定。比如贝莱德旗下260亿美元的H",
-    author: "news",
-    platform: "news",
-    category: "risk",
-    originalUrl: "https://wallstreetcn.com/member/articles/3768669",
-    publishedAt: "2026-03-29T01:50:00Z",
-    likes: 0,
-    comments: 0,
-    shares: 0,
-    tags: [],
-  },
-  {
-    id: "1388b98d2901",
-    title: "标普连跌5周，过去50年都罕见，且后续不太妙",
-    summary: "高盛资深交易员卡伦·摩根在周末的一份报告中写道： “周五是近年来最令人不安的交易日之一……标普500指数连续第五周收跌，这种情况自1970年以来只发生过几次”，最近一次是在2022年经济衰退恐慌期间。 即使是新冠疫情引发的股市暴跌或去年4月的关税日美股崩盘，也没有让标普500指数连续五周下跌。 利用这套有限的数据集，这位高盛交易员“对以往的收益情况进行了预测……结果并不乐观”。历史数据显示，接下",
-    author: "news",
-    platform: "news",
-    category: "market",
-    originalUrl: "https://wallstreetcn.com/charts/41958811",
-    publishedAt: "2026-03-28T16:53:00Z",
-    likes: 0,
-    comments: 0,
-    shares: 0,
-    tags: [],
-  },
-  {
-    id: "bf31abd2f7ef",
-    title: "黄金逼近熊市之际，抄底大军来了！",
-    summary: "黄金市场在经历数年来最大跌幅后，逢低买入者开始入场，令这场延续三年的牛市暂时保住颜面。 本月黄金价格累计跌幅达15%，从1月收盘峰值较高点的跌幅一度触及19%，逼近通常意义上标志熊市开启的20%警戒线。但周五出现转机——投资者重新入场，当日金价反弹约3%，市场情绪有所修复。 多位市场人士坚持认为，支撑黄金的结构性逻辑并未改变。富达国际基金经理George Efstathopoulos表示，此次回",
-    author: "news",
-    platform: "news",
-    category: "strategy",
-    originalUrl: "https://wallstreetcn.com/articles/3768650",
-    publishedAt: "2026-03-28T03:50:00Z",
     likes: 0,
     comments: 0,
     shares: 0,
@@ -3939,7 +3882,7 @@ export const mockSignals: SignalItem[] = [
     isTranslated: true,
     originalText: "FCNs are gaining traction among investors seeking steady income and more control over how they take risk. Our 2025 FCN subscription volume grew 35% year-over-year, with three typical strategy profiles: conservative, balanced, and aggressive.",
     tags: ["星展私行", "三种策略", "认购增长35%", "收入策略"],
-  },
+  }
 ];
 
 // ====== 动态计算统计数据 ======
